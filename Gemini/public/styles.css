@@ -1,0 +1,94 @@
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #15202b;
+    color: #ffffff;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  
+  /* Message thread at the top */
+  .thread {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-bottom: 15px;
+    padding-top: 10px;
+  }
+  
+  
+  /* Input box at the bottom */
+  .tweet-box {
+    background-color: #192734;
+    border-radius: 12px;
+    padding: 15px;
+    margin-top: auto;
+    box-shadow: 0 0 10px rgba(29, 155, 240, 0.2);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  textarea {
+    width: 100%;
+    border: none;
+    resize: none;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #22303c;
+    color: white;
+  }
+  
+  button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #1d9bf0;
+    color: white;
+    border: none;
+    border-radius: 9999px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #1a8cd8;
+  }
+  
+  .tweet {
+    width: 90%;                /* or 100% if you prefer */
+    margin: 0 auto;
+    padding: 15px;
+    box-sizing: border-box;
+    white-space: pre-wrap;
+    background-color: #192734;
+    border-radius: 12px;
+    box-shadow: 0 0 5px rgba(29, 155, 240, 0.2);
+  }
+  
+
+  .user-tweet {
+    background-color: #1d9bf0;
+    color: white;
+    align-self: flex-end;
+  }
+  
+  .gemini-reply {
+    background-color: #22303c;
+    align-self: flex-start;
+  }
+  
+  
