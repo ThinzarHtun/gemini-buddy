@@ -26,13 +26,17 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <div class="container">
-      <div class="tweet-box">
-        <textarea id="userInput" placeholder="What's happening?" rows="4"></textarea>
-        <button id="submit">Tweet @Gemini</button>
-      </div>
-      <div class="thread"></div>
+  <div class="container">
+    <!-- Messages thread -->
+    <div class="thread" id="thread"></div>
+
+    <!-- Input box -->
+    <div class="tweet-box">
+      <textarea id="userInput" placeholder="What's happening?" rows="3"></textarea>
+      <button id="submit">Tweet @Gemini</button>
     </div>
-    <script src="frontendScript.js"></script>
-</body>  
+  </div>
+
+  <script src="frontendScript.js"></script>
+</body>
 </html>

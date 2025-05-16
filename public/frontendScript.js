@@ -37,6 +37,36 @@
 const btn = document.getElementById('submit');
 const geminiThread = document.getElementById('thread');
 
+function createTweet(author, text, isUser = false) {
+  const tweet = document.createElement('div');
+  tweet.className = 'tweet ' + (isUser ? 'user-tweet' : 'gemini-reply');
+
+  const avatar = document.createElement('div');
+  avatar.className = 'avatar';
+
+  const content = document.createElement('div');
+  content.className = 'tweet-content';
+
+  const authorElem = document.createElement('div');
+  authorElem.className = 'tweet-author';
+  authorElem.textContent = author;
+
+  const textElem = document.createElement('div');
+  textElem.className = 'tweet-text';
+  textElem.textContent = text;
+
+  content.appendChild(authorElem);
+  content.appendChild(textElem);
+
+  // Both are on the same side (avatar on left)
+  tweet.appendChild(avatar);
+  tweet.appendChild(content);
+
+  return tweet;
+}
+
+
+
 btn.addEventListener('click', async () => {
   const inputText = document.getElementById("userInput");
   const userQuery = inputText.value.trim();
@@ -44,10 +74,7 @@ btn.addEventListener('click', async () => {
 
   inputText.value = '';
 
-  const userBubble = document.createElement('div');
-  userBubble.className = 'tweet user-tweet';
-  userBubble.textContent = userQuery;
-  geminiThread.appendChild(userBubble);
+  geminiThread.appendChild(createTweet("You", userQuery, true));
 
   try {
     const response = await fetch('/gemini', {
@@ -56,25 +83,15 @@ btn.addEventListener('click', async () => {
       body: JSON.stringify({ userQuery }),
     });
 
-    if (!response.ok) throw new Error('Network response was not ok: ' + response.status);
+    if (!response.ok) throw new Error('Network error: ' + response.status);
 
     const data = await response.json();
+    const reply = typeof data === 'string' ? data : JSON.stringify(data, null, 2);
 
-    const geminiBubble = document.createElement('div');
-    geminiBubble.className = 'tweet gemini-reply';
-    geminiBubble.textContent = typeof data === 'string' ? data : JSON.stringify(data, null, 2);
-    geminiThread.appendChild(geminiBubble);
-
+    geminiThread.appendChild(createTweet("Gemini", reply));
     geminiThread.scrollTop = geminiThread.scrollHeight;
-
-  } catch (error) {
-    console.error('Error during fetch:', error);
-
-    const errorBubble = document.createElement('div');
-    errorBubble.className = 'tweet gemini-reply';
-    errorBubble.textContent = 'Error: ' + error.message;
-    geminiThread.appendChild(errorBubble);
+  } catch (err) {
+    console.error(err);
+    geminiThread.appendChild(createTweet("Gemini", "Error: " + err.message));
   }
 });
-
-
